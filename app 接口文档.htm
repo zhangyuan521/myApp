@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#-1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>app 接口文档</title>
+    <link rel="shortcut icon" href="http://rap.taobao.org/stat/img/favicon.ico">
+    
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="http://rap.taobao.org/stat/img/favicon.ico">
+<link rel="stylesheet" href="./app 接口文档_files/bootstrap.min.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" href="./app 接口文档_files/rap.template.css" type="text/css" media="screen">
+<link rel="stylesheet" href="./app 接口文档_files/floater.css" type="text/css">
+<script type="text/javascript" src="./app 接口文档_files/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/tangram-1.2.1.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/tangram-fix.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/base.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/routes.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/ecui-1.1.0-br.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/floater.js"></script>
+<script type="text/javascript" src="./app 接口文档_files/rap.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="./app 接口文档_files/defcontrol.css">
+    <link type="text/css" rel="stylesheet" href="./app 接口文档_files/myWorkspace.css">
+    <script src="./app 接口文档_files/jsformat.js"></script>
+    <script src="./app 接口文档_files/mock-min.js"></script>
+</head>
+<body class="workspace" data-ecui="">
+
+<script>
+    function getUsers(callback, teamId) {
+        if ($.local('users')) {
+            callback($.local('users'));
+            return;
+        }
+        var params = {};
+        if (teamId) {
+            params.id = teamId;
+        }
+        $.get($.route('org.account.all'), params, function (data) {
+            users = data.users;
+            $.local('users', users);
+            callback(users);
+        }, "JSON");
+    }
+</script>
+
+    <div>
+        <a href="http://click.aliyun.com/m/7223/" target="_blank">
+            <div style="text-align: center; background-color: #020539;">
+                <img src="./app 接口文档_files/TB1S2XHOXXXXXayXFXXXXXXXXXX-760-50.jpg">
+            </div>
+        </a>
+    </div>
+
+        <div class="navbar navbar-inverse" role="navigation" style="border-radius: 0;"><!-- navbar-fixed-top -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#global-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://rap.taobao.org/">
+                    <i class="iconlogo mi-rap"></i>
+                    <span class="logo-text">
+                        <span id="rap-logo-text">RAP</span> 
+                        <span>v0.14.11</span>
+                        <span style="color:#cc0000; font-size:10px;">&nbsp;&nbsp;beta</span></span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="global-navbar">
+                <ul class="nav navbar-nav">
+                                            <li><a href="http://rap.taobao.org/org/index.do">主页</a></li>
+                        <li class="dropdown">
+                                                                                        <a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="dropdown-toggle" data-toggle="dropdown">团队 <b class="caret"></b></a>
+                                                        <div class="dropdown-menu teams">
+                                <ul class="dropdown-menu teams-list">
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=1">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;公开团队1
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=2">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;公开团队2
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=43">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;测试团队
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=48">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;test
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=58">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;8858
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=90">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;我账号写错了可以改么..
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=121">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;猛龙过江
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=149">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;微笑饰哀伤
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=150">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;husor
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=151">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;husor2
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=163">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;我的团队巴途
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=197">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;喃客
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=221">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;风骚的人生
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=223">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;盆锅
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=228">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;jinrongdong
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=360">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;一统天下
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=384">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;poMonitor
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=398">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;时贝团队
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=401">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;迷の团队
+                                        </a></li>
+                                                                            <li><a href="http://rap.taobao.org/org/productline.do?id=504">                                            <span class="glyphicon glyphicon-exclamation-sign" title="" data-container="body" data-original-title="公开团队,所有RAP用户均可访问,请注意数据安全."></span>&nbsp;&nbsp;君临天下
+                                        </a></li>
+                                                                        <div style="clear:both;"></div>
+                                </ul>
+                                <ul class="dropdown-menu teams-toolbar">
+                                    <li style="text-align:center;">
+                                        <button onclick="window.location.href = &#39;/org/team/teams.do&#39;;" class="btn btn-default btn-sm" data-original-title="" title=""><span class="glyphicon glyphicon-th-list" data-original-title="" title=""></span>全部团队
+                                        </button>
+                                    </li>
+                                    <li style="text-align:center;">
+                                        <button class="btn btn-primary btn-sm _createTeamBtn" data-original-title="" title=""><span class="glyphicon glyphicon-plus" data-original-title="" title=""></span>创建团队
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- <li><a href="/project/myProjectList.do">我的项目</a></li>
+                         <li><a href="/org/productline.do">产品线管理</a></li> -->
+                    
+                    <li><a href="https://github.com/thx/RAP/wiki/home_cn" target="_blank">文档</a></li>
+                    <li style="display:none;"><a href="http://rap.taobao.org/platform/test.do">测试</a></li>
+                    <li><a href="http://rap.taobao.org/platform/log.do">数据</a></li>
+                    <li><a href="http://thx.github.io/RAP/study.html" target="_blank">教程
+                        <!-- <span style="color:yellow;"> (new)</span> -->
+                    </a></li>
+                    <li><a id="jobHref" href="https://github.com/thx/RAP/issues/363" target="_blank" style="">招聘
+                    </a></li>
+                                            <li>
+                            <div class="search-project-con">
+                                <span class="glyphicon glyphicon-search" data-original-title="" title=""></span>
+                                <input type="text" class="project-search-inputer form-control" placeholder="搜索项目名称">
+
+                                <div class="project-autocomplete-con">
+                                    <ul class="list-unstyled">
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                                    </ul>
+                                    <div class="pull-right">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="dropdown-toggle messages-trigger">消息<span class="label label-success" style="display: none;">4</span></a>
+                                <ul class="dropdown-menu dropdown-menu-right messages-dropdown">
+                                    <li>
+                                        <div class="messages-container">
+                                            <div class="msgs"><div class="no-msgs">没有消息提醒</div></div>
+                                            <div class="btns"><input type="button" class="btn btn-primary set-btn" value="设置">		<input type="button" class="btn btn-warning clear-btn" value="清空">		<input type="button" class="btn btn-default close-btn" value="关闭"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="dropdown-toggle" data-toggle="dropdown">张源 <b class="caret"></b></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="http://rap.taobao.org/org/index.do">我的主页</a></li>
+                                    <li><a href="http://rap.taobao.org/account/myAccount.do">个人信息</a></li>
+                                    <li><a href="http://rap.taobao.org/account/mySetting.do">个人设置</a></li>
+                                    <li class="divider"></li>
+                                                                            <li><a href="http://rap.taobao.org/account/doLogout.do">退出</a></li>
+                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                            </div>
+            <!-- /.nav-collapse -->
+        </div>
+        <!-- /.container -->
+    </div><!-- /.navbar -->
+    <div class="container">
+
+
+<ol class="breadcrumb" style="position:relative;top:60px;background-color:#FFF;">
+    <li><a href="http://rap.taobao.org/org/team/teams.do">全部团队</a></li>
+    <li><a href="http://rap.taobao.org/org/productline.do?id=5094">duke-group</a></li>    <li><a href="http://rap.taobao.org/org/group.do?plid=6547">imooc</a></li>    <li class="active">duke</li></ol>
+<div id="div-fixed-panel">
+    <div class="clearfix">
+        <div id="div-w-message" class="label label-success" style="display: none;"></div>
+        <div id="div-control-panel" style="">
+            <div id="div-workspace-search">
+                <input type="text" id="inputSearch" class="form-control" placeholder="工作区搜索">
+                
+                <span class="glyphicon glyphicon-search" data-original-title="" title=""></span>
+
+                <div class="dropdown clearfix" id="dropdown-workspace-search" style="display:none;">
+                    <ul class="dropdown-menu" style="display:block" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation" class="dropdown-header">Dropdown header</li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#">Action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#">Another action</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#">Something else here</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Dropdown header</li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#">Separated link</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button id="btnFastSave" type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.quickSave(); return false;" title="" data-original-title="一键保存，方便快捷">
+                <span class="glyphicon glyphicon-flash" data-original-title="" title=""></span>
+                秒存
+            </button>
+            <button id="btnSave" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.switchToViewMode(true); return false;" title="" data-original-title="填写一些备注后保存">
+                <span class="glyphicon glyphicon-floppy-disk" data-original-title="" title=""></span>
+                慢存
+            </button>
+            <button id="btnCancel" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.switchToViewMode(false); return false;" title="" data-original-title="取消编辑，放弃所有未保存的修改">
+                <span class="glyphicon glyphicon-trash" data-original-title="" title=""></span>
+                取消
+            </button>
+                            <button id="btnEdit" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.switchToEditMode(); return false;" title="" data-original-title="锁定并进入文档编辑状态" style="display: none;">
+                    <span class="glyphicon glyphicon-pencil" data-original-title="" title=""></span>
+                    编辑
+                </button>
+
+                <button id="btnVersion" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.version(); return false;" title="" data-original-title="查看或切换到历史版本" style="display: none;">
+                    <span class="glyphicon glyphicon-refresh" data-original-title="" title=""></span>
+                    版本
+                </button>
+                        <button id="btnExitVersion" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.exitVersion(); return false;" style="display: none;" title="" data-original-title="退出版本查看">
+                <span class="glyphicon glyphicon-arrow-left" data-original-title="" title=""></span>
+                返回
+            </button>
+
+            <button id="btnToggleMockDisplay" type="button" class="btn btn-default btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" onclick="ws.toggleMockDisplay();" title="" data-original-title="显示/隐藏文档中的MockJS信息">
+                <span class="glyphicon glyphicon-headphones" data-original-title="" title=""></span>
+                Mock
+            </button>
+                            <button id="btnExport" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" onclick="ws.showPluginCode(); return false;" title="" data-original-title="配置项目路由，获取插件代码等...">
+                    <span class="glyphicon glyphicon-wrench" data-original-title="" title=""></span>
+                    配置
+                </button>
+                        <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" data-original-title="" title="">
+                    <span class="glyphicon glyphicon-th-large" data-original-title="" title=""></span>
+                    更多功能 <span style="color:#CC0000;">new</span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li>
+                        <a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="window.open(&#39;/workspace/export.do?projectId=10378&#39;);return false;">
+                            <span class="glyphicon glyphicon-file" data-original-title="" title=""></span>&nbsp;导出Word
+                        </a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="http://thx.github.io/RAP/resources/rap-shortcuts/"  target="_blank">
+                            <span class="glyphicon glyphicon-flash"></span>
+                            快捷键
+                        </a>
+                    </li>
+                    -->
+                    <li>
+                        <a href="https://github.com/thx/RAP/wiki/user_manual_cn" target="_blank">
+                            <span class="glyphicon glyphicon-list-alt" data-original-title="" title=""></span>
+                            帮助/教程
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid=%E9%9C%8D%E9%9B%8D&amp;siteid=cntaobao&amp;status=2&amp;charset=utf-8"><img border="0" src="./app 接口文档_files/realonline.aw" alt="RAP支持">在线客服</a>
+                    </li>
+                    <li>
+                        <a href="http://rap.taobao.org/api/queryRAPModel.do?projectId=10378" target="_blank" title="用于备份(导出),将JSON数据另存为,在导入时粘贴即可还原此时的文档.">
+                            <span class="glyphicon glyphicon-floppy-save" data-original-title="" title=""></span>&nbsp;导出备份
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="if (!ws.isEditMode()) {ws.switchToEditMode();}ecFloater.show(&#39;recoverWorkspaceFloater&#39;); return false;" title="将导出的备份文本粘贴,即可当做一次提交并还原到备份时的状态.">
+                            <span class="glyphicon glyphicon-floppy-open" data-original-title="" title=""></span>&nbsp;导入备份
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div id="div-debug"></div>
+    <div id="div-add-p-mt-list-container" style="">
+        <div id="div-add-p"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="btn btn-info btn-xs" onclick="ws.addP(); return false;" data-original-title="" title=""><i class="glyphicon glyphicon-plus" style="margin-right: 5px" data-original-title="" title=""></i>添加页面</a></div>
+        <div id="div-mt-list" class="clearfix"><a id="a-mt-16308" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.switchM(16308); return false;" ondblclick="ws.edit(16308, &#39;mt&#39;); return false;"><div class="tab first cur" id="div-mt-16308">rn</div></a><div id="div-add-m"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" style="margin:0 10px;" onclick="ws.addM(); return false;"><i class="glyphicon glyphicon-plus" style="color:#5bc0de"></i></a></div></div>
+    </div>
+
+</div>
+<div id="div-w">
+    <div id="div-m-list"><div class="m clearfix" id="div-m-16308" style="display: block;"><div id="div-tree-16308" class="tree-m"><div class="more ec-tree"><label>rn<a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeM(); return false;"><i class="glyphicon glyphicon-remove" style="color:#d9534f"></i></a></label></div><div class="ec-tree-items more-items" style=""><div class="ec-tree more"><label ondblclick="ws.editP(26722); return false;">普通视频列表<span class="div-p-control"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="edit-link" onclick="ws.editP(26722); return false;"><i class="glyphicon glyphicon-pencil"></i></a><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeP(26722); return false;" style="margin-left:5px;"><i class="glyphicon glyphicon-trash"></i></a></span><a class="test-link" href="http://rap.taobao.org/tester/pageTester.do?id=26722" target="_blank"><i class="glyphicon glyphicon-step-forward"></i></a></label></div><div class="ec-tree-items more-items" style=""><div id="div-a-tree-node-78001" class="ec-tree more-empty"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.switchA(78001); return false;" ondblclick="ws.editA(78001); return false;">普通视频列表</a><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="edit-link" onclick="ws.editA(78001); return false;"><i class="glyphicon glyphicon-pencil"></i></a><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeA(78001); return false;" style="margin-left:5px;"><i class="glyphicon glyphicon-trash"></i></a></div><div id="div-a-tree-node--1" class="ec-tree more-empty cur"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.switchA(-1); return false;" ondblclick="ws.editA(-1); return false;">点赞投票功能</a><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="edit-link" onclick="ws.editA(-1); return false;"><i class="glyphicon glyphicon-pencil"></i></a><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeA(-1); return false;" style="margin-left:5px;"><i class="glyphicon glyphicon-trash"></i></a></div><div style="margin-top:10px" class="ec-tree more-empty"><a class="btn btn-info btn-xs" href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.addA(26722); return false;"><i class="glyphicon glyphicon-plus" style="margin-right: 5px;"></i>添加接口</a></div></div></div></div><div class="seperator"></div><div class="div-a" id="div-a-16308"><h2 style="margin-top:20px;">接口详情 <span style="font-size: 14px; color: #999;">(id: -1) &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-danger btn-xs" onclick="ws.showMockData(-1);">Mock数据</button></span> </h2><div class="action-info" href="#" onclick="ws.editA(-1); return false;"><div class="item"><b>接口名称 </b>点赞投票功能</div><div class="item"><b>请求类型 </b><font color="orange">post</font></div><div class="item"><b>请求Url </b><font color="blue"> /api/up</font></div></div><div class="action-info"><a href"#"="" class="btn btn-default btn-xs" onclick="ws.moveAndCopy(); return false;"><i class="glyphicon glyphicon-random"></i>移动/复制接口</a></div><h2>请求参数列表</h2><table class="table-a"><tbody><tr class="head"><td class="head-expander"></td><td class="head-op">OP</td><td class="head-identifier">变量名</td><td class="head-name">含义</td><td class="head-type">类型</td><td class="head-remark">备注</td></tr><tr class="tr-param" id="tr-param--2" onmouseover="ws.showOpColumn(event, -2); return false;" onmouseout="ws.hideOpColumn(event, -2); return false;"><td class="expander" style="background-color:#E6E6E6;"></td><td id="td-param-op--2" class="td-param op" onclick="ws.edit(-2, &quot;param-op&quot;);"><div id="div-param-op--2" class="div-op-container" style="display: none;"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeParam(-2); return false;"><i class="glyphicon glyphicon-remove"></i></a></div></td><td id="td-param-identifier--2" class="td-param identifier" onclick="ws.edit(-2, &quot;param-identifier&quot;);">accessToken</td><td id="td-param-name--2" class="td-param name" onclick="ws.edit(-2, &quot;param-name&quot;);">用户识别</td><td id="td-param-dataType--2" class="td-param dataType"><select id="select-dataType--2" class="select-dataType" onkeydown="ws.dataTypeKeyPressed(event, -2);" onchange="ws.dataTypeSelectChanged(-2, this.value);"><option value=""></option><option value="number">number</option><option value="string" selected="true">string</option><option value="object">object</option><option value="boolean">boolean</option><option value="array&lt;number&gt;">array&lt;number&gt;</option><option value="array&lt;string&gt;">array&lt;string&gt;</option><option value="array&lt;object&gt;">array&lt;object&gt;</option><option value="array&lt;boolean&gt;">array&lt;boolean&gt;</option><option value="array">array</option></select></td><td id="td-param-remark--2" class="td-param remark" onclick="ws.edit(-2, &quot;param-remark&quot;);"></td></tr><tr class="tr-param" id="tr-param--3" onmouseover="ws.showOpColumn(event, -3); return false;" onmouseout="ws.hideOpColumn(event, -3); return false;"><td class="expander" style="background-color:#E6E6E6;"></td><td id="td-param-op--3" class="td-param op" onclick="ws.edit(-3, &quot;param-op&quot;);"><div id="div-param-op--3" class="div-op-container"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeParam(-3); return false;"><i class="glyphicon glyphicon-remove"></i></a></div></td><td id="td-param-identifier--3" class="td-param identifier" onclick="ws.edit(-3, &quot;param-identifier&quot;);">up</td><td id="td-param-name--3" class="td-param name" onclick="ws.edit(-3, &quot;param-name&quot;);">是否点赞</td><td id="td-param-dataType--3" class="td-param dataType"><select id="select-dataType--3" class="select-dataType" onkeydown="ws.dataTypeKeyPressed(event, -3);" onchange="ws.dataTypeSelectChanged(-3, this.value);"><option value=""></option><option value="number">number</option><option value="string" selected="true">string</option><option value="object">object</option><option value="boolean">boolean</option><option value="array&lt;number&gt;">array&lt;number&gt;</option><option value="array&lt;string&gt;">array&lt;string&gt;</option><option value="array&lt;object&gt;">array&lt;object&gt;</option><option value="array&lt;boolean&gt;">array&lt;boolean&gt;</option><option value="array">array</option></select></td><td id="td-param-remark--3" class="td-param remark" onclick="ws.edit(-3, &quot;param-remark&quot;);"></td></tr></tbody></table><div class="btns-container"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="btn btn-info btn-xs" onclick="ws.addParam(&#39;request&#39;); return false;"><i class="glyphicon glyphicon-plus"></i>添加参数</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href"#"="" class="btn btn-default btn-xs" onclick="ws.importJSON(true); return false;"><i class="glyphicon glyphicon-transfer"></i>导入JSON</a></div><h2>响应参数列表</h2><table class="table-a"><tbody><tr class="head"><td class="head-expander"></td><td class="head-op">OP</td><td class="head-identifier">变量名</td><td class="head-name">含义</td><td class="head-type">类型</td><td class="head-remark">备注</td></tr><tr class="tr-param" id="tr-param--4" onmouseover="ws.showOpColumn(event, -4); return false;" onmouseout="ws.hideOpColumn(event, -4); return false;"><td class="expander" style="background-color:#E6E6E6;"></td><td id="td-param-op--4" class="td-param op" onclick="ws.edit(-4, &quot;param-op&quot;);"><div id="div-param-op--4" class="div-op-container" style="display: none;"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" onclick="ws.removeParam(-4); return false;"><i class="glyphicon glyphicon-remove"></i></a></div></td><td id="td-param-identifier--4" class="td-param identifier" onclick="ws.edit(-4, &quot;param-identifier&quot;);">success</td><td id="td-param-name--4" class="td-param name" onclick="ws.edit(-4, &quot;param-name&quot;);">是否成功</td><td id="td-param-dataType--4" class="td-param dataType"><select id="select-dataType--4" class="select-dataType" onkeydown="ws.dataTypeKeyPressed(event, -4);" onchange="ws.dataTypeSelectChanged(-4, this.value);"><option value="" selected="true"></option><option value="number">number</option><option value="string">string</option><option value="object">object</option><option value="boolean">boolean</option><option value="array&lt;number&gt;">array&lt;number&gt;</option><option value="array&lt;string&gt;">array&lt;string&gt;</option><option value="array&lt;object&gt;">array&lt;object&gt;</option><option value="array&lt;boolean&gt;">array&lt;boolean&gt;</option><option value="array">array</option></select></td><td id="td-param-remark--4" class="td-param remark" onclick="ws.edit(-4, &quot;param-remark&quot;);">@mock=true</td></tr></tbody></table><div class="btns-container"><a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" class="btn btn-info btn-xs" onclick="ws.addParam(&#39;response&#39;); return false;"><i class="glyphicon glyphicon-plus"></i>添加参数</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href"#"="" class="btn btn-default btn-xs" onclick="ws.importJSON(); return false;"><i class="glyphicon glyphicon-transfer"></i>导入JSON</a></div></div></div></div>
+    <div id="div-w-status"></div>
+</div>
+    <footer style="margin-top: 40px; text-align: center;">
+        <p>
+            <span id="_logOnline">29</span>
+            <span>人在使用 RAP，今日 Mock 服务被调用</span>
+            <span id="_logMockNumToday">18465</span>
+            <span>次</span>
+            <span style="margin-left: 10px;">旺旺群支持：582755829</span>
+            <span style="margin-left: 10px;">
+                感谢<a href="https://www.aliyun.com/" target="_blank">阿里云</a>赞助
+            </span>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_5879641'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D5879641%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_5879641"></span><script src="./app 接口文档_files/stat.php" type="text/javascript"></script><script src="./app 接口文档_files/core.php" charset="utf-8" type="text/javascript"></script>
+        </p>
+    </footer>
+    <script>
+        function _logData() {
+            if (window.localStorage) {
+                if (window.localStorage.getItem('stopLogData')) {
+                    return;
+                }
+            }
+            jQuery.ajax({
+                url: '/account/logData.do',
+                success: function (data) {
+                    data = JSON.parse(data);
+                    $('#_logOnline').html(data.online);
+                    $('#_logMockNumToday').html(data.mockNumToday);
+                    var ele = $('#mockDataInDashboard');
+                    if (ele.length) {
+                        var startMockNum = +ele.attr('data-start');
+                        ele.html(startMockNum + (+data.mockNumToday));
+                    }
+                    // setTimeout(_logData, 2000);
+                }
+            });
+        }
+        _logData();
+    </script>
+</div><script type="text/javascript" src="./app 接口文档_files/core(1).php"></script><script type="text/javascript" src="./app 接口文档_files/core.js"></script>
+
+<!-- templates -->
+<script type="text/tmpl" id="_create-team-tmpl">
+<form id="_formCreateTeam">
+    <div class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                团队名称
+                <span style="color:red">
+                    *
+                </span>
+            </label>
+            <div class="col-sm-10">
+                <input type="text" id="_createTeamName" required class="form-control" style="width:432px;" placeholder="请在此编辑团队名称"
+                value="{{name}}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2 control-label">
+                权限
+            </label>
+            <div class="col-sm-10">
+                <input type="radio" value="1" id="_createTeamType1" checked="checked" name="_createTeamType"
+                />
+                <label for="_createTeamType1">
+                    仅团队成员可见
+                </label>
+                <input type="radio" value="2" id="_createTeamType2" name="_createTeamType"
+                />
+                <label for="_createTeamType2">
+                    全员可见
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2 control-label">
+                团队描述
+            </label>
+            <div class="col-sm-10">
+                <textarea class="form-control desc" id="_createTeamDesc" style="width:432px;resize:vertical;" placeholder="请在此编辑团队描述">{{desc}}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2 control-label">
+                团队成员
+            </label>
+            <div class="col-sm-10 picking-user"  style="position:relative">
+                {{#users}}
+                <span class="picked-user" data-name="{{name}}" data-account="{{account}}" title="{{account}} ({{name}})">
+                    {{account}} ({{name}})
+                    <i class="unpick-btn">
+                        &times;
+                    </i>
+                </span>
+                {{/users}}
+                <input class="form-control accounts-inputer" placeholder="添加项目成员" id="_createTeamMemberList" />
+                <span class="user-loading">
+                    项目成员列表加载中，请稍候~
+                </span>
+                <span class="glyphicon glyphicon-question-sign tip" title="如果该用户没有登录/注册过RAP，系统中就没有TA的信息。请TA先登录一下RAP吧。匹配时请可以输入TA的花名或帐号(域帐号)">
+                    找不到TA?
+                </span>
+                <div class="accounts-con">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+</script>
+<script type="text/tmpl" id="user-auto-list">
+    <ul class="autocompleter">
+        {{#users}}
+            <li data-account="{{account}}" data-name="{{name}}" {{^block}}title="{{account}} ({{name}})"{{/block}}{{#block}} data-block="true"{{/block}}>
+                {{#block}}没有更多匹配数据{{/block}}
+                {{^block}}{{account}} ({{name}}){{/block}}
+            </li>
+        {{/users}}
+    </ul>
+
+</script>
+<script type="text/tmpl" id="user-item-tmpl">
+    <span class="picked-user" data-name="{{name}}" data-account="{{account}}" title="{{account}} ({{name}})">{{account}} ({{name}})<i class="unpick-btn">&times;</i></span>
+
+</script>
+<script>
+    function _bindCreateTeamDialogAutoCompleteEvents() {
+        var that = this;
+
+        $.confirm({
+            content: $.render($('#_create-team-tmpl').text(), {}),
+            title: '创建团队',
+            confirmText: '确认创建',
+            cancelCallback: function () {
+
+            },
+            showCallback: function () {
+                var that = this;
+                $(this).find('input[type=text]').focus();
+                $(this).find('.picking-user').delegate('.unpick-btn', 'click', function () {
+                    $(this).parent('.picked-user').remove();
+                });
+                $('.tip').tooltip();
+                getUsers(function (users) {
+                    $('.user-loading').hide();
+                    $(that).find('.accounts-inputer').keyup(function () {
+                        $.autocomplete(that, users);
+                    }).focus(function () {
+                        $.autocomplete(that, users);
+                    });
+                });
+            },
+            confirmClicked: function () {
+                var modal = $(this);
+                var name = $('#_createTeamName').val();
+                var desc = $('#_createTeamDesc').val();
+                var isPrivate = $('#_createTeamType1')[0].checked;
+                var pickedUserList = [];
+                $('.picked-user').each(function (index, ele) {
+                    pickedUserList.push($(ele).data('account'));
+                });
+                $.post($.route('org.team.create'), {
+                    name: name,
+                    desc: desc,
+                    accessType: isPrivate ? 10 : 20,
+                    accountList: pickedUserList.join(',')
+                }, function (data) {
+                    modal.modal('hide');
+                    window.location.href = "/org/productline.do" + "?id=" + data.id
+                }, "JSON");
+            }
+        });
+
+
+    }
+
+    function _bindTemplateEvents() {
+        $('body').delegate('._createTeamBtn', 'click', _bindCreateTeamDialogAutoCompleteEvents);
+        $('.glyphicon').tooltip();
+    }
+
+    setTimeout(function() {
+        $('#jobHref').attr('style', '');
+    }, 2000);
+
+    _bindTemplateEvents();
+</script>
+<script>
+    function responsiveTeamList() {
+        // TODO
+    }
+    responsiveTeamList()
+</script>
+
+
+
+<div class="floater ec-form" style="width: 500px; height: 380px; position: absolute; visibility: hidden; z-index: 4096; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+    <form name="formSaveVSSFloater">
+        <div id="div-saveVSS-floater-message" style="display:none;" class="label">
+        </div>
+        <div id="div-saveVSS-floater-content">
+            <table class="table">
+                <tbody><tr>
+                    <td class="title">推进版本</td>
+                    <td class="radio-list clearfix">
+                        <input type="radio" id="radioVersion1" name="radioVersion" value="1" onchange="ws.radioVersionChanged(1);">
+                        <label for="radioVersion1">1</label>
+                        <input type="radio" id="radioVersion2" name="radioVersion" value="2" onchange="ws.radioVersionChanged(2);">
+                        <label for="radioVersion2">2</label>
+                        <input type="radio" id="radioVersion3" name="radioVersion" value="3" onchange="ws.radioVersionChanged(3);">
+                        <label for="radioVersion3">3</label>
+                        <input type="radio" id="radioVersion4" name="radioVersion" value="4" onchange="ws.radioVersionChanged(4);">
+                        <label for="radioVersion4">4</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">变化预览:</td>
+                    <td>
+                        <div id="divVersion"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">提交描述:</td>
+                    <td><textarea id="txtDescription" minlen="5" message="为了方便您以后查阅，提交描述为必填项，长度请勿小于5." style="width:320px; height: 150px"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="ws.doSaveVSS(); return false;" data-original-title="" title="">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            提交
+                        </button>
+                        <button type="button" class="btn btn-default" onclick="ws.cancelSaveVSS(); return false;" data-original-title="" title="">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            取消
+                        </button>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+    </form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 500px;"></label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 400px; position: absolute; visibility: hidden; z-index: 4097; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<div class="myfloater">
+    <div id="div-version-floater-message" class="label" style="display:none;"></div>
+    <div id="div-version-floater-content"><div id="div-version-panel"><table class="table-version"><tbody><tr class="head"><td class="version-op">OP</td><td class="version">版本</td><td class="operator">操作人</td><td class="operation-time">操作时间</td><td class="version-desc">描述</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148696"></td><td class="version">0.0.0.14</td><td class="operator">张源</td><td class="operation-time">2016-11-20 14:05:20</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148695"></td><td class="version">0.0.0.13</td><td class="operator">张源</td><td class="operation-time">2016-11-20 14:04:34</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148692"></td><td class="version">0.0.0.12</td><td class="operator">张源</td><td class="operation-time">2016-11-20 13:39:38</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148691"></td><td class="version">0.0.0.11</td><td class="operator">张源</td><td class="operation-time">2016-11-20 13:38:05</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148398"></td><td class="version">0.0.0.10</td><td class="operator">张源</td><td class="operation-time">2016-11-20 05:21:10</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148396"></td><td class="version">0.0.0.9</td><td class="operator">张源</td><td class="operation-time">2016-11-20 05:19:54</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148389"></td><td class="version">0.0.0.8</td><td class="operator">张源</td><td class="operation-time">2016-11-20 04:09:53</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148368"></td><td class="version">0.0.0.7</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:58:20</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148367"></td><td class="version">0.0.0.6</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:57:50</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148360"></td><td class="version">0.0.0.5</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:37:41</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148359"></td><td class="version">0.0.0.4</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:34:09</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148357"></td><td class="version">0.0.0.3</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:22:58</td><td class="version-desc">quick save</td></tr><tr class="table-row"><td><input name="radioCheckIn" type="radio" group="radioCheckInGroup" value="148356"></td><td class="version">0.0.0.2</td><td class="operator">张源</td><td class="operation-time">2016-11-20 02:19:47</td><td class="version-desc">quick save</td></tr></tbody></table></div></div>
+    <div class="div-floater-control">
+        <button id="btnObserveVersion" type="button" class="btn btn-primary" onclick="ws.readProjectOfVersion();" title="" data-original-title="点击后将以只读的方式查看某一版本。"><span class="glyphicon glyphicon-eye-open"></span>查看版本</button>
+        &nbsp;&nbsp;&nbsp;
+        <button id="btnSwitchVersion" type="button" class="btn btn-danger" onclick="ws.switchVersion();" title="" data-original-title="点击后将切换至该版本。"><span class="glyphicon glyphicon-repeat"></span>切换版本</button>
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-default" onclick="ws.closeVersionPanel();" data-original-title="" title=""><span class="glyphicon glyphicon-remove"></span>取消</button>
+    </div>
+</div>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;"></label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+    <div class="floater ec-form" style="width: 600px; height: 300px; position: absolute; z-index: 32768; left: 340px; top: 410px; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formEditAFloater">
+    <div id="floaterEditAFloater" class="myfloater">
+        <input type="hidden" id="editAFloater-id" value="">
+        <input type="hidden" id="editAFloater-pageId" value="26722">
+        <table>
+            <tbody><tr>
+                <td class="title">名称</td>
+                <td class="input">
+                    <input type="text" id="editAFloater-name" minlen="1" message="请求名称不能为空" maxlength="50">
+                </td>
+            </tr>
+            <tr>
+                <td class="title">请求类型</td>
+                <td class="radio-list clearfix">
+                    <input type="radio" id="editAFloater-type-1" name="editAFloater-type" value="1">
+                    <label for="editAFloater-type-1">GET</label>
+                    <input type="radio" id="editAFloater-type-2" name="editAFloater-type" value="2">
+                    <label for="editAFloater-type-2">POST</label>
+                    <input type="radio" id="editAFloater-type-3" name="editAFloater-type" value="3">
+                    <label for="editAFloater-type-3">PUT</label>
+                    <input type="radio" id="editAFloater-type-4" name="editAFloater-type" value="4">
+                    <label for="editAFloater-type-4">DELETE</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">请求链接</td>
+                <td class="input">
+                    <input type="text" id="editAFloater-requestUrl">
+                </td>
+            </tr>
+            <tr style="display:none;">
+                <td class="title">回跳模板</td>
+                <td class="input">
+                    <input type="text" id="editAFloater-responseTemplate">
+                </td>
+            </tr>
+            <tr>
+                <td class="title">说明</td>
+                <td>
+                    <textarea id="editAFloater-description" style="width: 450px; height: 150px; font-size: 12px; line-height: 1.5;" cols="20" rows="20"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">返回格式</td>
+                <td class="radio-list clearfix">
+                    <input type="radio" id="editAFloater-struct-2" name="editAFloater-struct" value="object">
+                    <label for="editAFloater-struct-2">对象{}</label>
+                    <input type="radio" id="editAFloater-struct-1" name="editAFloater-struct" value="array">
+                    <label for="editAFloater-struct-1">数组[{}, {}]</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tbody></table>
+        <div class="div-floater-control">
+            <button type="button" class="btn btn-primary" onclick="ws.doAddOrEditA();" data-original-title="" title="" value="">
+                <span class="glyphicon glyphicon-ok"></span>
+                确定
+            </button>
+            <button type="button" class="btn btn-default" onclick="ws.cancelEditA();" data-original-title="" title="" value="">
+                <span class="glyphicon glyphicon-remove"></span>
+                取消
+            </button>
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title" style="position: absolute; width: 600px;">模型管理 - 添加新请求</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 400px; position: absolute; visibility: hidden; z-index: 4098; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formEditPFloater">
+    <div class="myfloater">
+        <input type="hidden" id="editPFloater-id">
+        <input type="hidden" id="editPFloater-moduleId">
+        <table class="table">
+            <tbody><tr>
+                <td>名称</td>
+                <td>
+                    <input type="text" id="editPFloater-name" minlen="1" message="页面名称不能为空" maxlength="50" style="width: 250px;">
+                </td>
+            </tr>
+            <tr>
+                <td>说明</td>
+                <td>
+                    <textarea id="editPFloater-introduction" style="width: 450px; height: 200px; font-size: 12px; line-height: 1.5;" cols="20" rows="20"></textarea>
+                </td>
+            </tr>
+
+        </tbody></table>
+        <div class="div-floater-control">
+            <button type="button" class="btn btn-primary" onclick="ws.doAddOrEditP();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-ok"></span>提交
+            </button>
+            <button type="button" class="btn btn-default" onclick="ws.cancelEditP();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-remove"></span>取消
+            </button>
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">编辑页面</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 350px; position: absolute; visibility: hidden; z-index: 4099; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formImportJSONFloater">
+    <div id="div-importJSON-floater-message" style="display:none;" class="label"></div>
+    <div class="myfloater">
+        <table class="table">
+            <tbody><tr>
+                <td>
+                    <textarea placeholder="请输入JSON" id="importJSONFloater-text" style="width: 510px; height: 200px; font-size: 12px; line-height: 1.5;" cols="20" rows="20"></textarea>
+                </td>
+            </tr>
+        </tbody></table>
+        <div class="div-floater-control">
+            <button type="button" class="btn btn-primary" onclick="ws.doImportJSON();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-ok"></span>
+                导入
+            </button>
+            <button type="button" class="btn btn-default" onclick="ws.cancelImportJSON();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-remove"></span>
+                取消
+            </button>
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">JSON导入</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 350px; position: absolute; visibility: hidden; z-index: 4100; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formRecoverWorkspace">
+    <div id="div-recoverWorkspace-floater-message" style="display:none;" class="label"></div>
+    <div class="myfloater">
+        <table class="table">
+            <tbody><tr>
+                <td>
+                    <textarea placeholder="请输入备份JSON" id="recoverWorkspaceFloater-text" style="width: 510px; height: 200px; font-size: 12px; line-height: 1.5;" cols="20" rows="20"></textarea>
+                </td>
+            </tr>
+        </tbody></table>
+        <div class="div-floater-control">
+            <button type="button" class="btn btn-primary" onclick="ws.doRecoverWorkspace();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-ok"></span>
+                导入
+            </button>
+            <button type="button" class="btn btn-default" onclick="ecui.get(&#39;recoverWorkspaceFloater&#39;).hide();" data-original-title="" title="">
+                <span class="glyphicon glyphicon-remove"></span>
+                取消
+            </button>
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">导入备份数据</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 350px; position: absolute; visibility: hidden; z-index: 4101; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formImportJSONFloater">
+    <div class="myfloater">
+        <table class="table">
+            <tbody><tr>
+                <td>
+                    <textarea id="exportRAPDataFloater-text" style="width: 510px; height: 200px; font-size: 12px; line-height: 1.5;" cols="20" rows="20"></textarea>
+                </td>
+            </tr>
+        </tbody></table>
+        <div class="div-floater-control">
+            <input type="button" class="btn btn-default" onclick="ws.closeExportRAPDataFloater();" value="关闭" data-original-title="" title="">
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">JSON导入</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 230px; position: absolute; visibility: hidden; z-index: 4102; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formPluginCodeFloater">
+    <div class="myfloater">
+        <div>插件代码</div>
+        <div>
+            <input disabled="disabled" id="pluginCodeInput" style="width:550px;margin:8px 0;" type="text" value="&lt;script src=&quot;http://rap.taobao.org/rap.plugin.js?projectId=10378&quot;&gt;&lt;/script&gt;">
+        </div>
+        <div>项目路由</div>
+        <div>
+            <input id="divRelatedIds" style="width:550px;margin:8px 0;" type="text" placeholder="例:24,32,56  项目ID逗号隔开">
+        </div>
+        <div class="div-floater-control">
+            <input type="button" class="btn btn-default" onclick="ws.closePluginCodeFloater(1);" value="保存" data-original-title="" title="">
+            <input type="button" class="btn btn-default" onclick="ws.closePluginCodeFloater();" value="取消" data-original-title="" title="">
+        </div>
+    </div>
+    <div>
+
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">FE工具箱</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 180px; position: absolute; visibility: hidden; z-index: 4103; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<form name="formActionUrlFloater">
+    <div class="myfloater">
+        <div>
+            <input disabled="disabled" id="actionUrlFloater-input" style="width:550px;margin:8px 0;" type="text" value="">
+        </div>
+        <div class="div-floater-control">
+            <input type="button" class="btn btn-default" onclick="ws.closeActionUrlFloater();" value="关闭" data-original-title="" title="">
+        </div>
+    </div>
+</form>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">请求链接</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 600px; position: absolute; visibility: hidden; z-index: 4104; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<div class="myfloater">
+    <div>
+        <h5>Mock API</h5>
+        <ul>
+            <li>Mock规则：<a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" target="_blank" id="mockRulePreviewFloater-mockRule"></a></li>
+            <li>Mock数据：<a href="http://rap.taobao.org/workspace/myWorkspace.do?projectId=10378#" target="_blank" id="mockRulePreviewFloater-mockData"></a></li>
+        </ul>
+        <h5>Mock规则
+            <button style="margin-left:5px;" class="btn btn-default btn-xs" onclick="ws.copyToClipboard(&#39;mockRulePreviewFloater-container&#39;); return false;" data-original-title="" title="">
+                <i class="glyphicon glyphicon-copy"></i>复制
+            </button>
+        </h5>
+        <textarea style="width:100%;height:150px;overflow-y:auto;" id="mockRulePreviewFloater-container"></textarea>
+    </div>
+    <div>
+        <h5>Mock数据
+            <button style="margin-left:5px;" class="btn btn-default btn-xs" onclick="ws.copyToClipboard(&#39;mockDataPreviewFloater-container&#39;); return false;" data-original-title="" title="">
+                <i class="glyphicon glyphicon-copy"></i>复制
+            </button>
+            <button style="margin-left:5px;" class="btn btn-default btn-xs" onclick="ws.refreshMockPreviewData(); return false;" data-original-title="" title="">
+                <i class="glyphicon glyphicon-refresh"></i>刷新
+            </button>
+            <i class="glyphicon glyphicon-question-sign" style="color:#000000;margin-left:3px;" data-toggle="tooltip" data-placement="bottom" title="如果您的MOCK规则可能产生变动的数据,例如数组变量名为arr|1-10,表示随机生成1~10组数据,您可通过该按钮刷新随机的数据.我有木有很贴心?有木有~~有木有~~"></i>
+        </h5>
+        <textarea style="width:100%;height:150px;overflow-y:auto;" id="mockDataPreviewFloater-container"></textarea>
+    </div>
+    <div class="div-floater-control">
+        <input type="button" class="btn btn-default" onclick="ecui.get(&#39;mockDataPreviewFloater&#39;).hide();" value="关闭" data-original-title="" title="">
+    </div>
+</div>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">Mock数据预览</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+<div class="floater ec-form" style="width: 600px; height: 230px; position: absolute; visibility: hidden; z-index: 4105; display: none;">
+    
+<div class="floater-content">
+<div class="floater-inner">
+<div class="myfloater">
+    <form role="form">
+        <div class="form-group">
+            <label>您将对接口:&nbsp;<span id="actionOpFloater-title"></span>&nbsp;做何操作？</label>
+
+            <div>
+                <label class="radio-inline">
+                    <input type="radio" id="actionOpFloater-op-move" name="actionOpFloater-op" value="move" checked="checked"> 移动
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="actionOpFloater-op-copy" name="actionOpFloater-op" value="copy"> 复制
+                </label>
+                <!--
+                <label class="radio-inline">
+                    <input type="radio" id="actionOpFloater-op-mount" name="actionOpFloater-op"  value="mount" /> 挂载
+                </label>
+                -->
+            </div>
+        </div>
+        <div class="form-group">
+            <label>选择目标位置</label>
+            <ul class="list-inline">
+                <li>
+                    <select id="actionOpFloater-tab" onchange="ws.actionOpFloaterSelectChanged();" class="form-control"></select>
+                </li>
+                <li>
+                    <select id="actionOpFloater-page" class="form-control"></select>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-success" onclick="ws.closeActionOpFloater(true);" value="确定" data-original-title="" title="">
+            <input type="button" class="btn btn-default" onclick="ws.closeActionOpFloater();" value="取消" data-original-title="" title="">
+        </div>
+    </form>
+</div>
+</div><!--floater-inner-->
+</div>
+<label class="ec-control floater-title " style="position: absolute; width: 600px;">文档操作</label><div class="ec-control floater-close" style="position: absolute;"></div></div>
+
+
+
+<script type="text/javascript">
+
+    var urlObj = {
+            "getModuleHtmlAjax": "/workspace/getModuleHtmlAjax.do",
+            "updateSave": "/workspace/updateSave.do",
+            "updateCurrentSave": "/workspace/updateCurrentSave.do",
+            "querySave": "/workspace/querySave.do",
+            "removeSave": "/workspace/removeSave.do",
+            "checkIn": "/workspace/checkIn.do",
+            "checkOut": "/workspace/checkOut.do",
+            "imageRoot": "/stat/img/",
+            "lock": "/workspace/lock.do",
+            "unlock": "/workspace/unlock.do",
+            "ping": "/workspace/ping.do",
+            "queryVersion": "/workspace/queryVersion.do",
+            "switchVersion": "/workspace/switchVersion.do",
+            "pageTester": "/tester/pageTester.do",
+            "updateReleatedIds": "/project/updateReleatedIds.do",
+            "myWorkspace": "/workspace/myWorkspace.do",
+            "queryMockData": "/mock/queryMockData.do",
+            "base" : "rap.taobao.org"
+        },
+        ws = rap.workspace,
+        data,
+        util = rap.util;
+
+    jQuery.post('/workspace/loadWorkspace.do', 'projectId=10378', function(results) {
+        data = eval('(' + results + ')');
+
+        document.title = data.projectData.name + ' 接口文档';
+        $("#divRelatedIds").val(data.relatedIds);
+
+        if (data.projectData.moduleList.length === 0) {
+            data.projectData.moduleList = [{
+                "id": ws.generateId(),
+                "name": "某模块（点击编辑后双击修改）",
+                "introduction": "",
+                "pageList": [{
+                    "moduleId": ws.generateId(),
+                    "name": "某页面",
+                    "introduction": "",
+                    "id": ws.generateId(),
+                    "isIdGenerated": true,
+                    "actionList": [{
+                        "pageId": ws.generateId(),
+                        "name": "某请求",
+                        "requestType": "1",
+                        "requestUrl": "",
+                        "responseTemplate": "",
+                        "description": "",
+                        "id": ws.generateId(),
+                        "requestParameterList": [{
+                            "id": ws.generateId(),
+                            "identifier": "reqParam",
+                            "name": "某请求参数",
+                            "remark": "",
+                            "validator": "",
+                            "dataType": "number",
+                            "parameterList": []
+                        }],
+                        "responseParameterList": [{
+                            "id": ws.generateId(),
+                            "identifier": "resParam",
+                            "name": "某响应参数",
+                            "remark": "",
+                            "validator": "",
+                            "dataType": "number",
+                            "parameterList": []
+                        }]
+                    }]
+                }]
+            }];
+        }
+
+        ws.init(data, urlObj,0, callbackHandler);
+        $('#div-control-panel').show();
+        $('#div-add-p-mt-list-container').show()
+
+        function callbackHandler() {
+                            var isMockDisplay = window.localStorage ? localStorage.getItem("_isMockDisplay") : null;
+                if (location.toString().indexOf("mock=") == -1 && isMockDisplay != 'false') {
+                    ws.toggleMockDisplay();
+                }
+                    }
+
+        $('.btn').tooltip();
+    });
+
+
+</script>
+
+<div class="helper-tip anim part" style="display: block;">		<div class="dialog-item say-hi" style="width: 370px;">			<span class="name">RAP小助手</span>			<div class="content"><div>- 不会用RAP？RAP 5分钟介绍视频在 <a href="http://cloud.video.taobao.com//play/u/11051796/p/1/e/1/t/1/11622279.swf" target="_blank">这里</a></div>		<div>- 不会写Mockjs？我们为您准备了 <a href="http://mockjs.com/" target="_blank">文档</a> 和 <a href="http://rap.taobao.org/workspace/myWorkspace.action?projectId=79&amp;mock=true&amp;actionId=828" target="_blank">示例</a></div>		<div>- 遇到RAP的bug了？欢迎到 <a href="https://github.com/thx/RAP/issues/new" target="_blank">这里</a> 提交issue</div>		<div>- 想看看RAP官网文档？请点击 <a href="http://thx.github.io/RAP" target="_blank">这里</a></div>		<div>- 其他问题，请直接添加阿里旺旺群 582755829 </div></div>		</div>		<div class="mask" style="width: 100px; height: 100px;">		</div>		<img src="./app 接口文档_files/yellow.png" width="100" "="">	</div><div style="position: absolute; top: 197px; left: 0px; background-color: rgb(0, 0, 0); width: 1280px; height: 726px; z-index: 32767; opacity: 0.3; display: none;"></div><script src="./app 接口文档_files/core(2).php"></script></body></html>
