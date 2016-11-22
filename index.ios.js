@@ -30,10 +30,12 @@ var myProject = React.createClass ({
               selectedIconName='ios-videocam-outline'
               selected={this.state.selectedTab === 'list'}
               onPress={() => {
-            this.setState({
-              selectedTab: 'list',
-            });
-          }}>
+                      this.setState({
+                        selectedTab: 'list',
+                      });
+                 }
+              }
+          >
               <Navigator
                   initialRoute={{
                     name: 'list',
@@ -66,8 +68,8 @@ var myProject = React.createClass ({
               title="More"
               selected={this.state.selectedTab === 'account'}
               onPress={() => {
-            this.setState({
-              selectedTab: 'account',
+              this.setState({
+                selectedTab: 'account',
             });
           }}>
               <Account/>

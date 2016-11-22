@@ -201,7 +201,7 @@ var List = React.createClass ({
             name:'detail',
             component:Detail,
             params:{
-                row:row
+                data:row
             }
         })
     },
@@ -223,7 +223,7 @@ var List = React.createClass ({
                         tintColor="#ff6600"
                         title="拼命加载中..."
                       />
-                    }
+                    }                                       //向上滑动
                     onEndReachedTreshold={20}               //在离底部距离为多少时启动刷新
                     enableEmptySections = {true}            //是否允许内容为空
                     showsVerticalScrollIndicator = {false}  //是否显示垂直滚动条
