@@ -5,12 +5,12 @@ var List = require('./app/creation/index');
 var Edit = require('./app/edit/index');
 var Account = require('./app/account/index');
 
-var Component = React.Component;
 var AppRegistry = ReactNative.AppRegistry;
 var StyleSheet = ReactNative.StyleSheet;
 var Text = ReactNative.Text;
 var View = ReactNative.View;
 var TabBarIOS = ReactNative.TabBarIOS;
+var Navigator = ReactNative.Navigator;
 var Icon = require('react-native-vector-icons/Ionicons');
 
 var myProject = React.createClass ({
@@ -34,7 +34,19 @@ var myProject = React.createClass ({
               selectedTab: 'list',
             });
           }}>
-            <List/>
+              <Navigator
+                  initialRoute={{
+                    name: 'list',
+                    component: List
+                   }}
+                  configureScene={(route)=>{
+                    return Navigator.SceneConfigs.FloatFromRight
+                  }}
+                  renderScene={(route, navigator) => {
+                    var Component = route.component;
+                    return <Component {...route.params} navigator={navigator}/>
+                  }}
+              />
           </Icon.TabBarItem>
           <Icon.TabBarItem
               iconName='ios-recording-outline'

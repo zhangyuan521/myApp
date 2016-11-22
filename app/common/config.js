@@ -11,6 +11,7 @@ module.exports = {
     },
     api:{
         base:'http://rap.taobao.org/mockjs/10378/',
-        creations:'api/creations?accessToken=sdfsdf'
+        creations:'api/creations?accessToken=sdfsdf',
+        up:'api/up'
     }
 }
