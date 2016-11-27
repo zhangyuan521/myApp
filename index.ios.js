@@ -3,7 +3,8 @@ var React = require('react');
 
 var List = require('./app/creation/index');
 var Edit = require('./app/edit/index');
-var Account = require('./app/account/index');
+//var Account = require('./app/account/index');
+var Login = require('./app/account/login');
 
 var AppRegistry = ReactNative.AppRegistry;
 var StyleSheet = ReactNative.StyleSheet;
@@ -17,7 +18,7 @@ var myProject = React.createClass ({
   getInitialState(){
     console.log('getInitialState');
     return {
-        selectedTab: 'list',
+        selectedTab: 'account',
     };
   },
   render: function() {
@@ -72,7 +73,7 @@ var myProject = React.createClass ({
                 selectedTab: 'account',
             });
           }}>
-              <Account/>
+              <Login/>
           </Icon.TabBarItem>
         </TabBarIOS>
     );
