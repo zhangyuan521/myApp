@@ -15,6 +15,7 @@ var TouchableOpacity = ReactNative.TouchableOpacity;
 var AlertIOS = ReactNative.AlertIOS;
 var Image = ReactNative.Image;
 var Icon = require('react-native-vector-icons/Ionicons');
+var Progress = require('react-native-progress');
 var Dimensions = ReactNative.Dimensions;
 var AsyncStorage = ReactNative.AsyncStorage;
 var width = Dimensions.get('window').width;
@@ -49,7 +50,9 @@ var Account = React.createClass ({
     getInitialState:function () {
         var user = this.props.user || {};
         return {
-            user:user
+            user:user,
+            avatorProgress:0,
+            avatorUploading:false,
         }
     },
     componentDidMount:function () {
@@ -115,6 +118,10 @@ var Account = React.createClass ({
         var that = this;
         var xhr = new XMLHttpRequest();
         var url = CLOUDINARY.image;
+        this.setState({
+            avatorUploading:true,
+            avatorProgress:0
+        })
         xhr.open('post',url);
         xhr.onload = ()=>{
             if(xhr.status != 200){
@@ -140,8 +147,20 @@ var Account = React.createClass ({
                 var user = this.state.user;
                 user.avator = avator(response.public_id, 'image');
                 that.setState({
+                    avatorUploading:false,
+                    avatorProgress:0,
                     user:user
                 })
+            }
+        }
+        if(xhr.upload){
+            xhr.upload.onprogress = (event)=>{
+                if(event.lengthComputable){
+                    var percent = Number((event.loaded / event.total).toFixed(2));
+                    that.setState({
+                        avatorProgress:percent
+                    })
+                }
             }
         }
         xhr.send(body);
@@ -160,9 +179,17 @@ var Account = React.createClass ({
                     ? <TouchableOpacity onPress={this._pickPhoto} style={styles.avatorContainer}>
                         <Image source={{uri:user.avator}} style={styles.avatorContainer}>
                             <View style={styles.avatorBox}>
-                                <Image
-                                    source={{uri:user.avator}}
-                                    style={styles.avator}/>
+                                {
+                                    this.state.avatorUploading
+                                        ? <Progress.Circle
+                                        size={75}
+                                        showText={true}
+                                        color="pink"
+                                        progress={this.state.avatorProgress} />
+                                        : <Image
+                                        source={{uri:user.avator}}
+                                        style={styles.avator}/>
+                                }
                             </View>
                             <Text style={styles.avatorTip}>戳这里换头像</Text>
                         </Image>
@@ -170,9 +197,17 @@ var Account = React.createClass ({
                     :<View style={styles.avatorContainer}>
                         <Text style={styles.avatorTip}>添加狗狗头像</Text>
                         <TouchableOpacity style={styles.avatorBox}>
-                            <Icon
-                                name="ios-cloud-upload-outline"
-                                style={styles.plusIcon}/>
+                            {
+                                this.state.avatorUploading
+                                ? <Progress.Circle
+                                    size={75}
+                                    showText={true}
+                                    color="yellowgreen"
+                                    progress={this.state.avatorProgress} />
+                                : <Icon
+                                    name="ios-cloud-upload-outline"
+                                    style={styles.plusIcon}/>
+                            }
                         </TouchableOpacity>
                     </View>
                 }
