@@ -3,7 +3,7 @@ var React = require('react');
 
 var List = require('./app/creation/index');
 var Edit = require('./app/edit/index');
-//var Account = require('./app/account/index');
+var Account = require('./app/account/index');
 var Login = require('./app/account/login');
 
 var AppRegistry = ReactNative.AppRegistry;
@@ -12,16 +12,62 @@ var Text = ReactNative.Text;
 var View = ReactNative.View;
 var TabBarIOS = ReactNative.TabBarIOS;
 var Navigator = ReactNative.Navigator;
+var AsyncStorage = ReactNative.AsyncStorage;
 var Icon = require('react-native-vector-icons/Ionicons');
 
 var myProject = React.createClass ({
   getInitialState(){
     console.log('getInitialState');
     return {
-        selectedTab: 'account',
+        user:null,
+        selectedTab: 'list',
+        logined:false
     };
   },
+  componentDidMount:function () {
+        this._syncAppStatus();
+  },
+  _syncAppStatus:function () {
+    var that = this;
+    AsyncStorage.getItem('user')
+        .then((data)=>{
+            var user;
+            var newState = {};
+            if(data){
+                user = JSON.parse(data);
+            }
+            if(user && user.accessToken){
+                newState.user = user;
+                newState.logined = true;
+            }else{
+                newState.logined = false;
+            }
+            that.setState(newState);
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+
+  },
+  _afterLogin:function (user) {
+    var that = this;
+    user = JSON.stringify(user);
+      console.log(user);
+      AsyncStorage.setItem('user',user)
+        .then(()=>{
+            that.setState({
+                logined:true,
+                user:user
+            })
+        })
+          .catch(function (error) {
+          console.log('shibai');
+      })
+  },
   render: function() {
+    if(!this.state.logined){
+        return <Login afterLogin={this._afterLogin}/>;
+    }
     return (
         <TabBarIOS
             unselectedTintColor="yellow" tintColor="#ee735c">
@@ -73,7 +119,7 @@ var myProject = React.createClass ({
                 selectedTab: 'account',
             });
           }}>
-              <Login/>
+              <Account/>
           </Icon.TabBarItem>
         </TabBarIOS>
     );
