@@ -9,8 +9,10 @@ var ImagePicker = require('react-native-image-picker');
 var request = require('../common/request');
 var config = require('../common/config');
 var StyleSheet = ReactNative.StyleSheet;
+var Modal = ReactNative.Modal;
 var Text = ReactNative.Text;
 var View = ReactNative.View;
+var TextInput = ReactNative.TextInput;
 var TouchableOpacity = ReactNative.TouchableOpacity;
 var AlertIOS = ReactNative.AlertIOS;
 var Image = ReactNative.Image;
@@ -53,7 +55,18 @@ var Account = React.createClass ({
             user:user,
             avatorProgress:0,
             avatorUploading:false,
+            modalVisible:false
         }
+    },
+    _edit:function () {
+        this.setState({
+            modalVisible:true
+        })
+    },
+    _closeModal:function () {
+        this.setState({
+            modalVisible:false
+        })
     },
     componentDidMount:function () {
         var that = this;
@@ -165,12 +178,20 @@ var Account = React.createClass ({
         }
         xhr.send(body);
     },
+    _changeUserState:function (key,value) {
+        var user = this.state.user;
+        user[key] = value;
+        this.setState({
+            user:user
+        })
+    },
     render:function () {
         var user = this.state.user;
         return (
             <View style={styles.container}>
                 <View style={styles.toolbar}>
-                    <Text style={styles.toolbarTitle}>我的账号</Text>
+                    <Text style={styles.toolbarTitle}>狗狗的账号</Text>
+                    <Text style={styles.toolbarExtra} onPress={this._edit}>编辑</Text>
 
                 </View>
 
@@ -184,7 +205,7 @@ var Account = React.createClass ({
                                         ? <Progress.Circle
                                         size={75}
                                         showText={true}
-                                        color="pink"
+                                        color="green"
                                         progress={this.state.avatorProgress} />
                                         : <Image
                                         source={{uri:user.avator}}
@@ -202,7 +223,7 @@ var Account = React.createClass ({
                                 ? <Progress.Circle
                                     size={75}
                                     showText={true}
-                                    color="yellowgreen"
+                                    color="green"
                                     progress={this.state.avatorProgress} />
                                 : <Icon
                                     name="ios-cloud-upload-outline"
@@ -211,6 +232,60 @@ var Account = React.createClass ({
                         </TouchableOpacity>
                     </View>
                 }
+                <Modal
+                    animationType={'fade'}
+                    visible={this.state.modalVisible}>
+                    <View style={styles.modalContainer}>
+                        <Icon name="ios-close-outline"
+                            style={styles.closeIcon}
+                            onPress={this._closeModal}/>
+                        <View style={styles.fieldItem}>
+                            <Text style={styles.label}>昵称</Text>
+                            <TextInput placeholder="输入你的昵称" style={styles.inputField}
+                                autoCapitalize={'none'}
+                                autoCorrect={false}
+                                defaultValue={user.nickname}
+                                onChangeText={(text)=>{
+                                    this._changeUserState('nickname',text);
+                                 }}
+                            />
+                        </View>
+                        <View style={styles.fieldItem}>
+                            <Text style={styles.label}>品种</Text>
+                            <TextInput placeholder="狗狗的品种" style={styles.inputField}
+                                       autoCapitalize={'none'}
+                                       autoCorrect={false}
+                                       defaultValue={user.breed}
+                                       onChangeText={(text)=>{
+                                    this._changeUserState('breed',text);
+                                 }}
+                            />
+                        </View>
+                        <View style={styles.fieldItem}>
+                            <Text style={styles.label}>年龄</Text>
+                            <TextInput placeholder="狗狗的的年龄" style={styles.inputField}
+                                       autoCapitalize={'none'}
+                                       autoCorrect={false}
+                                       defaultValue={user.age}
+                                       onChangeText={(text)=>{
+                                    this._changeUserState('age',text);
+                                 }}
+                            />
+                        </View>
+                        <View style={styles.fieldItem}>
+                            <Text style={styles.label}>性别</Text>
+                            <TextInput placeholder="狗狗的的性别" style={styles.inputField}
+                                       autoCapitalize={'none'}
+                                       autoCorrect={false}
+                                       defaultValue={user.age}
+                                       onChangeText={(text)=>{
+                                    this._changeUserState('age',text);
+                                 }}
+                            />
+                        </View>
+                    </View>
+
+                </Modal>
             </View>
         )
     }
@@ -266,7 +341,51 @@ var styles = StyleSheet.create({
         height:width * 0.2,
         resizeMode:'cover',
         borderRadius:width * 0.1
+    },
+    toolbarExtra:{
+        position:'absolute',
+        right: 10,
+        top:26,
+        textAlign:'right',
+        fontWeight:'600',
+        fontSize:14
+
+    },
+    modalContainer:{
+        flex:1,
+        paddingTop:50,
+        backgroundColor:'#fff',
+    },
+    fieldItem:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        height:50,
+        paddingLeft:15,
+        paddingRight:15,
+        borderColor:'#eee',
+        borderBottomWidth:1,
+    },
+    label:{
+        color:'#ccc',
+        marginRight:10,
+    },
+    inputField:{
+        height:50,
+        flex:1,
+        color:'#666',
+        fontSize:14
+    },
+    closeIcon:{
+        position:'absolute',
+        width:40,
+        height:40,
+        fontSize:32,
+        right:20,
+        top:30,
+        color:'#ee735c'
     }
+
 });
 
 module.exports = Account;
