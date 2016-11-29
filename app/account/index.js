@@ -45,6 +45,12 @@ var CLOUDINARY = {
 };
 
 function avator(id, type) {
+    if(id.indexOf('http')>-1){
+        return id;
+    }
+    if(id.indexOf('data:image')>-1){
+        return id;
+    }
     return CLOUDINARY.base + '/' + type + '/upload/' + id;
 }
 
@@ -83,12 +89,11 @@ var Account = React.createClass ({
                 that.setState(newState);
             })
             .catch(function (error) {
-                console.log(error)
+                console.log(error);
             })
     },
     _pickPhoto:function () {
         var that = this;
-        console.log(ImagePicker);
         ImagePicker.showImagePicker(options, (response) => {
             if (response.didCancel) {
                 return;
@@ -158,12 +163,13 @@ var Account = React.createClass ({
 
             if(response && response.public_id){
                 var user = this.state.user;
-                user.avator = avator(response.public_id, 'image');
+                user.avator = response.public_id;
                 that.setState({
                     avatorUploading:false,
                     avatorProgress:0,
                     user:user
-                })
+                });
+                this._syncAvator();
             }
         }
         if(xhr.upload){
@@ -177,6 +183,10 @@ var Account = React.createClass ({
             }
         }
         xhr.send(body);
+    },
+    _syncAvator:function () {
+        var user = JSON.stringify(this.state.user);
+        AsyncStorage.setItem('user',user);
     },
     _changeUserState:function (key,value) {
         var user = this.state.user;
@@ -198,7 +208,7 @@ var Account = React.createClass ({
                 {
                     user.avator
                     ? <TouchableOpacity onPress={this._pickPhoto} style={styles.avatorContainer}>
-                        <Image source={{uri:user.avator}} style={styles.avatorContainer}>
+                        <Image source={{uri:avator(user.avator,'image')}} style={styles.avatorContainer}>
                             <View style={styles.avatorBox}>
                                 {
                                     this.state.avatorUploading
@@ -208,7 +218,7 @@ var Account = React.createClass ({
                                         color="green"
                                         progress={this.state.avatorProgress} />
                                         : <Image
-                                        source={{uri:user.avator}}
+                                        source={{uri:avator(user.avator,'image')}}
                                         style={styles.avator}/>
                                 }
                             </View>
