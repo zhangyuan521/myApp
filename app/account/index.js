@@ -12,6 +12,7 @@ var StyleSheet = ReactNative.StyleSheet;
 var Modal = ReactNative.Modal;
 var Text = ReactNative.Text;
 var View = ReactNative.View;
+import Button from 'react-native-button';
 var TextInput = ReactNative.TextInput;
 var TouchableOpacity = ReactNative.TouchableOpacity;
 var AlertIOS = ReactNative.AlertIOS;
@@ -169,7 +170,7 @@ var Account = React.createClass ({
                     avatorProgress:0,
                     user:user
                 });
-                this._syncAvator();
+                this._syncUser(true);
             }
         }
         if(xhr.upload){
@@ -184,9 +185,29 @@ var Account = React.createClass ({
         }
         xhr.send(body);
     },
-    _syncAvator:function () {
-        var user = JSON.stringify(this.state.user);
-        AsyncStorage.setItem('user',user);
+    _syncUser:function (isAvator) {
+        var that = this;
+        var user = this.state.user;
+        if(user && user.accessToken){
+            var url = config.api.base + config.api.update;
+            request.post(url,user)
+                .then((data)=>{
+                    console.log(data);
+                    if(data && data.success){
+                        var user = data.data;
+                        if(isAvator){
+                            AlertIOS.alert('头像跟新成功');
+                        }
+                        that.setState({
+                            user:user
+                        },function () {
+                            that._closeModal();
+                            AsyncStorage.setItem('user',JSON.stringify(user));
+                        })
+                    }
+                })
+
+        }
     },
     _changeUserState:function (key,value) {
         var user = this.state.user;
@@ -194,6 +215,12 @@ var Account = React.createClass ({
         this.setState({
             user:user
         })
+    },
+    _submit:function () {
+        this._syncUser(false);
+    },
+    _logout:function () {
+        this.props.logout();
     },
     render:function () {
         var user = this.state.user;
@@ -284,18 +311,35 @@ var Account = React.createClass ({
                         </View>
                         <View style={styles.fieldItem}>
                             <Text style={styles.label}>性别</Text>
-                            <TextInput placeholder="狗狗的的性别" style={styles.inputField}
-                                       autoCapitalize={'none'}
-                                       autoCorrect={false}
-                                       defaultValue={user.age}
-                                       onChangeText={(text)=>{
-                                    this._changeUserState('age',text);
-                                 }}
-                            />
+                            <Icon.Button
+                                onPress={()=>{
+                                    this._changeUserState('gender','male')
+                                }}
+                                style={[
+                                    styles.gender,
+                                    user.gender == 'male' && styles.genderChecked
+                                ]}
+                                name="ios-paw-outline"
+                            >男</Icon.Button>
+                            <Icon.Button
+                                onPress={()=>{
+                                    this._changeUserState('gender','female')
+                                }}
+                                style={[
+                                    styles.gender,
+                                    user.gender == 'female' && styles.genderChecked
+                                ]}
+                                name="ios-paw"
+                            >女</Icon.Button>
                         </View>
+                        <Button
+                            style={styles.btn}
+                            onPress={this._submit}>登录</Button>
                     </View>
-
                 </Modal>
+                <Button
+                    style={styles.btn}
+                    onPress={this._logout}>退出登录</Button>
             </View>
         )
     }
@@ -394,8 +438,24 @@ var styles = StyleSheet.create({
         right:20,
         top:30,
         color:'#ee735c'
-    }
-
+    },
+    gender:{
+        backgroundColor:'#ccc',
+    },
+    genderChecked:{
+        backgroundColor:'#ee735c',
+    },
+    btn:{
+        marginTop:25,
+        marginLeft:10,
+        marginRight:10,
+        padding:10,
+        backgroundColor:'transparent',
+        borderColor:'#ee735c',
+        borderWidth:1,
+        borderRadius:4,
+        color:'#ee735c'
+    },
 });
 
 module.exports = Account;

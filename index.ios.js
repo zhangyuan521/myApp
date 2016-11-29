@@ -64,6 +64,13 @@ var myProject = React.createClass ({
           console.log('shibai');
       })
   },
+  _logout:function () {
+    AsyncStorage.removeItem('user');
+    this.setState({
+        logined: false,
+        user:null
+    })
+  },
   render: function() {
     if(!this.state.logined){
         return <Login afterLogin={this._afterLogin}/>;
@@ -119,7 +126,7 @@ var myProject = React.createClass ({
                 selectedTab: 'account',
             });
           }}>
-              <Account/>
+              <Account user={this.state.user} logout={this._logout}/>
           </Icon.TabBarItem>
         </TabBarIOS>
     );
