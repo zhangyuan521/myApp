@@ -36,7 +36,7 @@ var Item = React.createClass ({
         var that = this;
         var up = !this.state.up;
         var row = this.state.row;
-        var url = config.api.base + config.api.up;
+        var url = config.api.base2 + config.api.up;
         var body = {
             id: row._id,
             up: row ? 'yes' : 'no',
@@ -118,7 +118,7 @@ var List = React.createClass ({
             })
         }
 
-        request.get(config.api.base + config.api.creations,{
+        request.get(config.api.base2 + config.api.creations,{
                 accessToken:'abcdef',
                 page:page
             })

@@ -35,15 +35,6 @@ var options = {
         path: 'images'
     }
 };
-var CLOUDINARY = {
-    cloud_name: 'dgf748kky',
-    api_key: '648877967177585',
-    api_secret: 'uN_RzI0Mppk6M_vUmn0uUHVulHQ',
-    base: 'http://res.cloudinary.com/dgf748kky',
-    image: 'https://api.cloudinary.com/v1_1/dgf748kky/image/upload',
-    video: 'https://api.cloudinary.com/v1_1/dgf748kky/video/upload',
-    audio: 'https://api.cloudinary.com/v1_1/dgf748kky/raw/upload',
-};
 
 function avator(id, type) {
     if(id.indexOf('http')>-1){
@@ -52,7 +43,11 @@ function avator(id, type) {
     if(id.indexOf('data:image')>-1){
         return id;
     }
-    return CLOUDINARY.base + '/' + type + '/upload/' + id;
+    if(id.indexOf('avator/') > -1){
+        return CLOUDINARY.base + '/' + type + '/upload/' + id;
+    }else{
+        return 'http://ohhf5gs44.bkt.clouddn.com/' + id;
+    }
 }
 
 var Account = React.createClass ({
@@ -93,6 +88,17 @@ var Account = React.createClass ({
                 console.log(error);
             })
     },
+    _getQiniuToken(){
+       var accessToken = this.state.user.accessToken;
+       var signatureURL = config.api.base + config.api.signature;
+       return request.post(signatureURL,{
+            accessToken:accessToken,
+            cloud:'qiniu'
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    },
     _pickPhoto:function () {
         var that = this;
         ImagePicker.showImagePicker(options, (response) => {
@@ -100,16 +106,30 @@ var Account = React.createClass ({
                 return;
             }
             var avatorData = 'data:image/jpeg;base64,' + response.data;
+            console.log(response);
             var timestamp = Date.now();
-            var tags = 'app.avator';
-            var folder = 'avator';
             var signatureURL = config.api.base + config.api.signature;
-            var accessToken = this.state.user.accessToken;
-            request.post(signatureURL,{
+            var uri = response.uri;
+            this._getQiniuToken()
+                .then((data)=>{
+                    if(data && data.success){
+                        //data.data
+                        var token = data.data.token;
+                        var key = data.data.key;
+                        var body = new FormData();
+                        body.append('token',token);
+                        body.append('key',key);
+                        body.append('file',{
+                            type: 'imate/png',
+                            uri: uri,
+                            name: key
+                        });
+                        that._upload(body);
+                    }
+                })
+           /* request.post(signatureURL,{
                 accessToken:accessToken,
                 timestamp:timestamp,
-                folder:folder,
-                tags:tags,
                 type:'avator'
             })
             .catch((err)=>{
@@ -118,8 +138,7 @@ var Account = React.createClass ({
             .then((data)=>{
                 if(data && data.success){
                     //data.data
-                    var signature = 'folder=' + folder + '&tags=' + tags + '&timestamp=' + timestamp + CLOUDINARY.api_secret;
-                    signature = sha1(signature);
+                    signature = data.data;
                     var body = new FormData();
                     body.append('folder',folder);
                     body.append('signature',signature);
@@ -130,13 +149,13 @@ var Account = React.createClass ({
                     body.append('file',avatorData);
                     that._upload(body);
                 }
-            })
+            })*/
         });
     },
     _upload:function (body) {
         var that = this;
         var xhr = new XMLHttpRequest();
-        var url = CLOUDINARY.image;
+        var url = config.qiniu.upload;
         this.setState({
             avatorUploading:true,
             avatorProgress:0
@@ -162,9 +181,15 @@ var Account = React.createClass ({
                 console.log('parse fails');
             }
 
-            if(response && response.public_id){
+            if(response){
                 var user = this.state.user;
-                user.avator = response.public_id;
+                if(response.public_id){
+                    user.avator = response.public_id;
+                }
+                if(response.key){
+                    user.avator = response.key;
+                }
+
                 that.setState({
                     avatorUploading:false,
                     avatorProgress:0,
@@ -172,6 +197,7 @@ var Account = React.createClass ({
                 });
                 this._syncUser(true);
             }
+            
         }
         if(xhr.upload){
             xhr.upload.onprogress = (event)=>{

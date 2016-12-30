@@ -9,8 +9,20 @@ module.exports = {
             'Content-Type': 'application/json',
         },
     },
+    qiniu:{
+        upload: 'http://upload.qiniu.com',
+    },
+    cloudinary:{
+        cloud_name: 'dgf748kky',
+        api_key: '648877967177585',
+        base: 'http://res.cloudinary.com/dgf748kky',
+        image: 'https://api.cloudinary.com/v1_1/dgf748kky/image/upload',
+        video: 'https://api.cloudinary.com/v1_1/dgf748kky/video/upload',
+        audio: 'https://api.cloudinary.com/v1_1/dgf748kky/raw/upload',
+    },
     api:{
-        base:'http://rap.taobao.org/mockjs/10378/',
+        base:'http://localhost:3000/',
+        base2:'http://rap.taobao.org/mockjs/10378/',
         creations:'api/creations?accessToken=sdfsdf',
         comment:'api/comments',
         up:'api/up',
